@@ -6,16 +6,40 @@ import time
 st.set_page_config(page_title="Monte Carlo Pi Simulator", layout="wide")
 
 # --- Theory Section ---
-st.title("🧮 Monte Carlo Pi Estimation")
-st.write("""
-### The Theory
-Imagine a square with a side length of 1, and a quarter-circle inside it with a radius of 1.
-- **Area of Square** = 1
-- **Area of Quarter Circle** = π / 4
+st.title("🧮 Monte Carlo Estimation of π")
 
-By scattering random dots, the ratio of dots inside the circle to total dots should be **π/4**. 
-Therefore: **π ≈ 4 * (Inside / Total)**
+st.markdown(r"""
+### The Mathematical Foundation
+
+The Monte Carlo method is a stochastic technique based on **probability** and **random sampling**. 
+To estimate the value of $\pi$, we use the geometric relationship between a square and an inscribed quarter-circle.
+
+#### 1. Geometric Setup
+Consider a square with side length $r = 1$ placed in the first quadrant of a Cartesian plane. Inside this square, we draw a quarter-circle centered at the origin $(0,0)$.
+
+*   **Area of the Square ($A_s$):**
+    $$A_s = r^2 = 1^2 = 1$$
+*   **Area of the Quarter-Circle ($A_c$):**
+    $$A_c = \frac{1}{4} \pi r^2 = \frac{\pi}{4}$$
+
+#### 2. The Probability Ratio
+If we randomly scatter $N$ points within the square, the probability $P$ that a point falls inside the quarter-circle is proportional to the ratio of their areas:
+
+$$\frac{\text{Points Inside Circle}}{\text{Total Points}} \approx \frac{A_c}{A_s} = \frac{\pi/4}{1}$$
+
+#### 3. Deriving $\pi$
+From the ratio above, we can isolate $\pi$:
+$$\pi \approx 4 \times \frac{N_{inside}}{N_{total}}$$
+
+#### 4. The Algorithm
+For each random point $(x, y)$ where $0 \le x, y \le 1$:
+1. Calculate the distance from the origin: $d = \sqrt{x^2 + y^2}$.
+2. If $d \le 1$, the point is **Inside** (using the circle equation $x^2 + y^2 \le r^2$).
+3. If $d > 1$, the point is **Outside**.
 """)
+
+st.divider() # Adds a nice visual line before the simulation
+
 
 # --- Sidebar Inputs ---
 st.sidebar.header("Simulation Settings")
