@@ -5,38 +5,49 @@ import time
 
 st.set_page_config(page_title="Monte Carlo Pi Simulator", layout="wide")
 
-# --- Theory Section ---
+# --- Theory Section with Static Diagram ---
 st.title("🧮 Monte Carlo Estimation of π")
 
-st.markdown(r"""
-### The Mathematical Foundation
+# 1. Create a static explanatory diagram
+fig_theory, ax_t = plt.subplots(figsize=(4, 4))
+ax_t.set_xlim(0, 1.1)
+ax_t.set_ylim(0, 1.1)
+ax_t.set_aspect('equal')
 
-The Monte Carlo method is a stochastic technique based on **probability** and **random sampling**. 
-To estimate the value of $\pi$, we use the geometric relationship between a square and an inscribed quarter-circle.
+# Draw Square and Circle
+square = plt.Rectangle((0, 0), 1, 1, color='lightgray', alpha=0.3, label='Square (Area = 1)')
+ax_t.add_patch(square)
+theta = np.linspace(0, np.pi/2, 100)
+ax_t.plot(np.cos(theta), np.sin(theta), color='black', lw=2, label='Circle (Area = π/4)')
+ax_t.fill_between(np.cos(theta), 0, np.sin(theta), color='blue', alpha=0.1)
 
-#### 1. Geometric Setup
-Consider a square with side length $r = 1$ placed in the first quadrant of a Cartesian plane. Inside this square, we draw a quarter-circle centered at the origin $(0,0)$.
+# Annotations
+ax_t.text(0.5, 0.5, r'$x^2 + y^2 \leq 1$', fontsize=12, ha='center', color='blue')
+ax_t.set_title("Geometric Model")
+ax_t.set_xlabel("x")
+ax_t.set_ylabel("y")
 
-*   **Area of the Square ($A_s$):**
-    $$A_s = r^2 = 1^2 = 1$$
-*   **Area of the Quarter-Circle ($A_c$):**
-    $$A_c = \frac{1}{4} \pi r^2 = \frac{\pi}{4}$$
+# Display the diagram and the text side-by-side
+col_a, col_b = st.columns([1, 2])
+with col_a:
+    st.pyplot(fig_theory)
+with col_b:
+    st.markdown(r"""
+    ### The Mathematical Foundation
+    The Monte Carlo method uses **random sampling** to solve deterministic problems. 
+    To estimate $\pi$, we use the ratio between a square and an inscribed quarter-circle.
 
-#### 2. The Probability Ratio
-If we randomly scatter $N$ points within the square, the probability $P$ that a point falls inside the quarter-circle is proportional to the ratio of their areas:
+    **1. Areas:**
+    - Square ($A_s$): $r^2 = 1$
+    - Quarter-Circle ($A_c$): $\frac{1}{4} \pi r^2 = \frac{\pi}{4}$
 
-$$\frac{\text{Points Inside Circle}}{\text{Total Points}} \approx \frac{A_c}{A_s} = \frac{\pi/4}{1}$$
-
-#### 3. Deriving $\pi$
-From the ratio above, we can isolate $\pi$:
-$$\pi \approx 4 \times \frac{N_{inside}}{N_{total}}$$
-
-#### 4. The Algorithm
-For each random point $(x, y)$ where $0 \le x, y \le 1$:
-1. Calculate the distance from the origin: $d = \sqrt{x^2 + y^2}$.
-2. If $d \le 1$, the point is **Inside** (using the circle equation $x^2 + y^2 \le r^2$).
-3. If $d > 1$, the point is **Outside**.
-""")
+    **2. The Logic:**
+    By scattering $N$ random points, the ratio of points inside the circle to total points equals the ratio of their areas:
+    $$\frac{N_{in}}{N_{total}} \approx \frac{A_c}{A_s} = \frac{\pi}{4}$$
+    
+    **3. The Result:**
+    $$\pi \approx 4 \times \frac{N_{in}}{N_{total}}$$
+    """)
 
 st.divider() # Adds a nice visual line before the simulation
 
