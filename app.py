@@ -54,7 +54,7 @@ st.divider() # Adds a nice visual line before the simulation
 
 # --- Sidebar Inputs ---
 st.sidebar.header("Simulation Settings")
-num_obs = st.sidebar.number_input("How many observations?", min_value=100, max_value=50000, value=1000, step=500)
+num_obs = st.sidebar.number_input("How many observations?", min_value=100, max_value=100000, value=1000, step=500)
 run_btn = st.sidebar.button("Run Simulation")
 
 if run_btn:
