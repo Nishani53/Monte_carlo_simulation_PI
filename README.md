@@ -54,5 +54,5 @@ The simulation follows these steps:
 ---
 
 ## 👨‍💻 Author
-**Nishani53**  
-Check out my other projects on [GitHub](https://github.com).
+**Naresh Khanal**  
+Check out my other projects on [GitHub](https://github.com/Nishani53).
