@@ -52,10 +52,27 @@ with col_b:
 st.divider() # Adds a nice visual line before the simulation
 
 
-# --- Sidebar Inputs ---
-st.sidebar.header("Simulation Settings")
-num_obs = st.sidebar.number_input("How many observations?", min_value=100, max_value=100000, value=1000, step=500)
-run_btn = st.sidebar.button("Run Simulation")
+# --- Main Body Inputs (Replaces Sidebar) ---
+st.subheader("Simulation Settings")
+
+# Using columns so it looks good on wide screens, but stacks on mobile
+input_col1, input_col2 = st.columns([2, 1])
+
+with input_col1:
+    num_obs = st.number_input(
+        "How many observations?", 
+        min_value=100, 
+        max_value=100000, 
+        value=1000, 
+        step=500
+    )
+
+with input_col2:
+    # Adding a bit of padding so the button aligns with the input field
+    st.write("##") 
+    run_btn = st.button("🚀 Run Simulation", use_container_width=True)
+
+# Everything below this (the if run_btn: logic) stays exactly the same!
 
 if run_btn:
     # Setup Plotting
