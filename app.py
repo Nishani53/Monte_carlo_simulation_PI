@@ -114,7 +114,7 @@ if run_btn:
         plt.close(fig1)
 
         # Draw Graph Frame
-        fig2, ax2 = plt.subplots(figsize=(5, 5))
+        fig2, ax2 = plt.subplots(figsize=(5, 4))
         ax2.plot(counts, pi_values, color='black')
         ax2.axhline(y=np.pi, color='green', linestyle='--')
         ax2.set_ylim(2.5, 3.8)
