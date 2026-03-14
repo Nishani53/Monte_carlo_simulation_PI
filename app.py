@@ -103,7 +103,7 @@ if run_btn:
         counts.append(current_total)
 
         # Draw Simulation Frame
-        fig1, ax1 = plt.subplots(figsize=(5, 5))
+        fig1, ax1 = plt.subplots(figsize=(5, 4))
         ax1.set_xlim(0, 1); ax1.set_ylim(0, 1)
         ax1.scatter(x_in, y_in, color='blue', s=2, alpha=0.5)
         ax1.scatter(x_out, y_out, color='red', s=2, alpha=0.5)
