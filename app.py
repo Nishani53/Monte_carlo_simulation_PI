@@ -13,7 +13,7 @@ st.set_page_config(
 
 st.title("🧮 Monte Carlo Estimation of π")
 # --- Theory Section with Static Diagram ---
-st.title("🧮 Monte Carlo Estimation of π")
+# st.title("🧮 Monte Carlo Estimation of π")
 
 # 1. Create a static explanatory diagram
 fig_theory, ax_t = plt.subplots(figsize=(4, 4))
