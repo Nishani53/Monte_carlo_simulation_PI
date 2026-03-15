@@ -3,8 +3,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 
-st.set_page_config(page_title="Monte Carlo Pi Simulator", layout="wide")
 
+# ---  FIRST STREAMLIT COMMAND ---
+st.set_page_config(
+    page_title="Monte Carlo Pi Simulator", 
+    page_icon="🎯", 
+    layout="wide"
+)
+
+st.title("🧮 Monte Carlo Estimation of π")
 # --- Theory Section with Static Diagram ---
 st.title("🧮 Monte Carlo Estimation of π")
 
